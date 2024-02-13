@@ -12,6 +12,7 @@ const Tab = createBottomTabNavigator();
 export default class BottomTabNavigator extends Component {
   render() {
     return (
+      //Conter uma navegação de abas inferiores
       <NavigationContainer>
         <Tab.Navigator
           screenOptions={({ route }) => ({
@@ -54,6 +55,7 @@ export default class BottomTabNavigator extends Component {
             }
           }}
         >
+          //Nomes das telas de navegação
           <Tab.Screen name="Alugue uma Bicicleta" component={RideScreen} />
           <Tab.Screen name="Histórico de Locações" component={RideHistoryScreen} />
         </Tab.Navigator>
