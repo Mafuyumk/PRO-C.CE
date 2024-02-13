@@ -27,7 +27,7 @@ export default class LoginScreen extends Component {
     };
   }
 
-  //Autenticação9 do firebase com email e 
+  //Autenticação9 do firebase com email e senha
   handleLogin = (email, password) => {
     firebase
       .auth()
