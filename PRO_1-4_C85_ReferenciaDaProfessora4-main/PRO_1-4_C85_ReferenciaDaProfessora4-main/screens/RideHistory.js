@@ -26,6 +26,7 @@ export default class RideHistoryScreen extends Component {
     this.getTransactions(email);
   };
 
+  //Pegar transações
   getTransactions = email => {
     db.collection("transactions")
       .where("email_id", "==", email)
@@ -41,6 +42,7 @@ export default class RideHistoryScreen extends Component {
       });
   };
 
+  //Busca todos os dados das bikes
   handleSearch = async (bikeId, email) => {
     bikeId = bikeId.toUpperCase().trim();
     this.setState({
@@ -64,6 +66,7 @@ export default class RideHistoryScreen extends Component {
       });
   };
 
+  //Buscar mais transações
   fetchMoreTransactions = async (bikeId, email) => {
     bikeId = bikeId.toUpperCase().trim();
 
@@ -83,6 +86,7 @@ export default class RideHistoryScreen extends Component {
     });
   };
 
+  //Renderizar items
   renderItem = ({ item, i }) => {
     var date = item.date
       .toDate()
@@ -91,6 +95,7 @@ export default class RideHistoryScreen extends Component {
       .splice(0, 4)
       .join(" ");
 
+    //Tipos de transações
     var transactionType =
       item.transaction_type === "rented" ? "entregue" : "devolvida";
     return (
@@ -140,6 +145,7 @@ export default class RideHistoryScreen extends Component {
     );
   };
 
+//Exibição de componentes
   render() {
     const { searchText, allTransactions, email } = this.state;
     return (
