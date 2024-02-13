@@ -9,6 +9,7 @@ import {
   Alert,
   KeyboardAvoidingView
 } from "react-native";
+//Fazendo as importaçôes
 
 import firebase from "firebase";
 import db from "../config";
@@ -22,9 +23,11 @@ export default class LoginScreen extends Component {
     this.state = {
       email: "",
       password: ""
+      //estado de armazenamento
     };
   }
 
+  //Autenticação9 do firebase com email e 
   handleLogin = (email, password) => {
     firebase
       .auth()
@@ -69,6 +72,7 @@ export default class LoginScreen extends Component {
           </TouchableOpacity>
         </View>
       </KeyboardAvoidingView>
+//Exibição dos textos, imagens e botões
     );
   }
 }
