@@ -18,6 +18,7 @@ import db from "../config";
 const bgImage = require("../assets/background2.png");
 const appIcon = require("../assets/appIcon.png");
 
+//funções principais
 export default class RideScreen extends Component {
   constructor(props) {
     super(props);
@@ -32,12 +33,13 @@ export default class RideScreen extends Component {
       email: firebase.auth().currentUser.email
     };
   }
-
+  //Abre todas as funções assim que abre a tela
   async componentDidMount() {
     const { email } = this.state;
     await this.getUserDetails(email);
   }
 
+  //Permissões da camera
   getCameraPermissions = async () => {
     const { status } = await Permissions.askAsync(Permissions.CAMERA);
 
@@ -51,6 +53,7 @@ export default class RideScreen extends Component {
     });
   };
 
+  //Scannear código de barras
   handleBarCodeScanned = async ({ type, data }) => {
     this.setState({
       bikeId: data,
@@ -59,6 +62,7 @@ export default class RideScreen extends Component {
     });
   };
 
+  //Gerenciador de entrega e devolução
   handleTransaction = async () => {
     var { bikeId, userId, email } = this.state;
     await this.getBikeDetails(bikeId);
@@ -118,6 +122,7 @@ export default class RideScreen extends Component {
     }
   };
 
+  //Pegar detalhes da bike
   getBikeDetails = bikeId => {
     bikeId = bikeId.trim();
     db.collection("bicycles")
@@ -132,6 +137,7 @@ export default class RideScreen extends Component {
       });
   };
 
+  //Pegar detalhes do usuário
   getUserDetails = email => {
     db.collection("users")
       .where("email_id", "==", email)
@@ -147,6 +153,7 @@ export default class RideScreen extends Component {
       });
   };
 
+  //Disponibilidade da bicicleta
   checkBikeAvailability = async bikeId => {
     const bikeRef = await db
       .collection("bicycles")
@@ -172,6 +179,7 @@ export default class RideScreen extends Component {
     return transactionType;
   };
 
+  //Verificação se pode pegar
   checkUserEligibilityForStartRide = async (userId, email) => {
     const userRef = await db
       .collection("users")
@@ -203,6 +211,7 @@ export default class RideScreen extends Component {
     return isUserEligible;
   };
 
+  //Se ele pode devolver a bike
   checkUserEligibilityForEndRide = async (bikeId, userId, email) => {
     const transactionRef = await db
       .collection("transactions")
@@ -226,6 +235,7 @@ export default class RideScreen extends Component {
     return isUserEligible;
   };
 
+  //Registro da bike
   assignBike = async (bikeId, userId, bikeType, userName, email) => {
     //adicionar uma transação
     db.collection("transactions").add({
@@ -256,6 +266,7 @@ export default class RideScreen extends Component {
     });
   };
 
+  //Retorna a bike
   returnBike = async (bikeId, userId, bikeType, userName, email) => {
     //adicionar uma transação
     db.collection("transactions").add({
@@ -286,6 +297,7 @@ export default class RideScreen extends Component {
     });
   };
 
+  //Exibição de componentes
   render() {
     const { bikeId, userId, domState, scanned, bikeAssigned } = this.state;
     if (domState !== "normal") {
