@@ -15,6 +15,7 @@ export default class App extends Component {
     };
   }
 
+  //Carregar fontes
   async loadFonts() {
     await Font.loadAsync({
       Rajdhani_600SemiBold: Rajdhani_600SemiBold
@@ -35,6 +36,7 @@ export default class App extends Component {
   }
 }
 
+//Mudar a tela
 const AppSwitchNavigator = createSwitchNavigator(
   {
     Login: {
@@ -49,4 +51,5 @@ const AppSwitchNavigator = createSwitchNavigator(
   }
 );
 
+//Uma caixa de telas
 const AppContainer = createAppContainer(AppSwitchNavigator);
